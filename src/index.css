@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+
+@theme {
+    --color-light-black: oklch(0.2786 0.0155 160.9);
+    --color-black: oklch(0.2786 0.0155 160.9);
+    --color-blue-green: oklch(0.4692 0.0661 196.53);
+    --color-green: oklch(0.5977 0.137 127.7);
+    --color-light-green: oklch(0.9689 0.0146 132.47);
+    --font-raleway: "Raleway", sans-serif;
+
+}
