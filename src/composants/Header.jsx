@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Header() {
     return (
-        <header className="bg-light-black/25 shadow-md h-[50px]">
+        <header className="shadow-md h-[50px] w-full fixed backdrop-blur-sm bg-light-black/25 z-50">
             <nav className="w-full flex justify-between items-center px-4 py-3 sm:px-6 lg:px-8 h-full">
                 <Link to="/" className=" flex items-center h-full">
                     <img src="/media/logo-lg-white.png" alt="Logo" className="h-full"/>

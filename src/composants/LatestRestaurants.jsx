@@ -9,7 +9,7 @@ export default function LatestRestaurants() {
     useEffect(() => {
         const fetchLatest = async () => {
             try {
-                const res = await API.get('http://localhost:5000/api/restaurants/latest');
+                const res = await API.get('/restaurants/latest');
                 setRestaurants(res.data);
             } catch (err) {
                 setError('Erreur lors du chargement des restaurants');
