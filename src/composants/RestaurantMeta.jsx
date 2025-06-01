@@ -2,17 +2,56 @@ import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import StarIcon from '@mui/icons-material/Star';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import API from '../services/api.js';
 
-export default function RestaurantMeta({average, cuisine, vegan, vegetarian, wheelchair, delivery, takeaway}) {
+export default function RestaurantMeta({average, cuisine, vegan, vegetarian, wheelchair, delivery, takeaway, r_id, user}) {
     const [rating, setRating] = useState(0);
+    const [liked, setLiked] = useState(false);
+
+    useEffect(() => {
+        const checkIsFavorite = async () => {
+            if (user && r_id) {
+                try {
+                    const response = await API.get(`favorites/${r_id}`);
+                    if (response.data.favorite) {
+                        setLiked(true);
+                    } else {
+                        setLiked(false)
+                    }
+                } catch (err) {
+                    console.log(err);
+                    setLiked(false);
+                }
+                console.log(liked);
+            }
+        };
+        checkIsFavorite();
+    }, [r_id, user]);
+
+    const toggleLike = async () => {
+        if(!user) return alert("Connexion requise");
+
+        try {
+            if(!liked) {
+                await API.post('/favorites', {restaurant_id: r_id});
+                console.log('ajouté aux favoris');
+                setLiked(true);
+            } else {
+                console.log(liked);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     return (
         <div className="w-1/5 px-4 py-8 flex flex-col items-center gap-8">
-
             {/*INTERACTION BUTTONS*/}
             <div className="flex justify-center gap-6 ">
                 <WatchLaterIcon className="text-white hover:text-blue-green transition-colors"/>
-                <FavoriteIcon className="text-white hover:text-blue-green transition-colors"/>
+                <FavoriteIcon onClick={toggleLike}
+                              className={`cursor-pointer transition-colors ${liked ? "text-green" : "text-white"}`}/>
                 <LocalDiningIcon className="text-white hover:text-blue-green transition-colors"/>
             </div>
             {/*SEPARATOR*/}
