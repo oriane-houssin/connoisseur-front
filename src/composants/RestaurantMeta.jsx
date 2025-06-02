@@ -38,7 +38,9 @@ export default function RestaurantMeta({average, cuisine, vegan, vegetarian, whe
                 console.log('ajouté aux favoris');
                 setLiked(true);
             } else {
-                console.log(liked);
+                await API.delete(`favorites/${r_id}`);
+                console.log('Supprimé des favoris');
+                setLiked(false);
             }
         } catch (err) {
             console.error(err);
