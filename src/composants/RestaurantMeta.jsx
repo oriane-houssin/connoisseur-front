@@ -1,25 +1,19 @@
-import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import StarIcon from '@mui/icons-material/Star';
 import {useState, useEffect} from 'react';
 import API from '../services/api.js';
+import ReviewModal from './ReviewModal.jsx';
+import Restaurant3Butons from './Restaurant3Butons.jsx';
 
-export default function RestaurantMeta({average, cuisine, vegan, vegetarian, wheelchair, delivery, takeaway, r_id, user}) {
+export default function RestaurantMeta({average, cuisine, vegan, vegetarian, wheelchair, delivery, takeaway, r_id, user, onReviewSubmittedExternally}) {
     const [userRating, setUserRating] = useState(0);
-    const [liked, setLiked] = useState(false);
+    const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
+
+//FETCH RATING AND FAV
     useEffect(() => {
         const fetchData = async () => {
             if (user && r_id) {
                 try {
-                    //VERIF FAVORIS
-                    const response = await API.get(`favorites/${r_id}`);
-                    if (response.data.favorite) {
-                        setLiked(true);
-                    } else {
-                        setLiked(false)
-                    }
                     //VERIF RATING
                     const rating = await API.get(`ratings/${r_id}`);
                     if (rating.data.userRating !== null) {
@@ -32,29 +26,10 @@ export default function RestaurantMeta({average, cuisine, vegan, vegetarian, whe
                     setLiked(false);
                     setUserRating(0);
                 }
-                console.log(liked);
             }
         };
         fetchData();
     }, [r_id, user]);
-
-    //LIKER UN RESTO
-    const toggleLike = async () => {
-        if(!user) return alert("Connexion requise");
-        try {
-            if(!liked) {
-                await API.post('/favorites', {restaurant_id: r_id});
-                console.log('ajouté aux favoris');
-                setLiked(true);
-            } else {
-                await API.delete(`favorites/${r_id}`);
-                console.log('Supprimé des favoris');
-                setLiked(false);
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    };
 
     //NOTER UN RESTO
     const handleRatingClick = async (newRating) => {
@@ -78,15 +53,29 @@ export default function RestaurantMeta({average, cuisine, vegan, vegetarian, whe
         }
     };
 
+    //OUVRIR MODAL REVIEW
+    const openReviewModal = () => {
+        setIsReviewModalOpen(true);
+    }
+
+    //FERMER MODAL REVIEW
+    const closeReviewModal = () => {
+        setIsReviewModalOpen(false);
+    }
+
+    //TRIGGER RE-FETCH DE REVIEWLIST
+    const onReviewSubmitted = () => {
+        if (onReviewSubmittedExternally) {
+            onReviewSubmittedExternally();
+        }
+    };
+
     return (
         <div className="w-1/5 px-4 py-8 flex flex-col items-center gap-8">
-            {/*INTERACTION BUTTONS*/}
-            <div className="flex justify-center gap-6 ">
-                <WatchLaterIcon className="text-white hover:text-blue-green transition-colors"/>
-                <FavoriteIcon onClick={toggleLike}
-                              className={`cursor-pointer transition-colors ${liked ? "text-green" : "text-white"}`}/>
-                <LocalDiningIcon className="text-white hover:text-blue-green transition-colors"/>
-            </div>
+            <Restaurant3Butons
+                r_id={r_id}
+                user={user}
+            />
             {/*SEPARATOR*/}
             <div className="w-1/3 bg-black border border-b-white"/>
 
@@ -106,7 +95,7 @@ export default function RestaurantMeta({average, cuisine, vegan, vegetarian, whe
 
             {/*INTERACTION LINKS*/}
             <ul className="text-sm text-center ">
-                <li className="mb-1">Review</li>
+                <li className="mb-1 cursor-pointer hover:text-blue-green transition-colors" onClick={openReviewModal}>Review</li>
                 <li className="mb-1">Add to lists</li>
                 <li className="mb-1">Share</li>
             </ul>
@@ -140,6 +129,15 @@ export default function RestaurantMeta({average, cuisine, vegan, vegetarian, whe
                     {delivery && delivery !== "no" && (<span>Livraison</span>)}
                 </div>
             </div>
+
+            {/*REVIEW MODAL*/}
+            <ReviewModal
+                isOpen={isReviewModalOpen}
+                onClose={closeReviewModal}
+                r_id={r_id}
+                user={user}
+                onReviewSubmitted={onReviewSubmitted}
+            />
         </div>
     )
 }

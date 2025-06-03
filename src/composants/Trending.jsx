@@ -1,14 +1,13 @@
 import {useEffect, useState} from "react";
 import API from '../services/api';
-import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import Restaurant3Butons from "./Restaurant3Butons";
 import StarIcon from '@mui/icons-material/Star';
 import {Link} from 'react-router-dom';
 
-export default function Trending() {
+export default function Trending({user}) {
     const [restaurants, setRestaurants] = useState([]);
     const [error, setError] = useState('');
+    const [liked, setLiked] = useState(false);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -43,13 +42,10 @@ export default function Trending() {
                                     <li><span className="font-semibold">Marque :</span> {r.brand || '—'}</li>
                                 </ul>
                                 <div className="flex flex-col items-center gap-2 py-2">
-                                    <div className="flex justify-center gap-6">
-                                        <WatchLaterIcon
-                                            className="text-white hover:text-light-black transition-colors"/>
-                                        <FavoriteIcon className="text-white hover:text-light-black transition-colors"/>
-                                        <LocalDiningIcon
-                                            className="text-white hover:text-light-black transition-colors"/>
-                                    </div>
+                                    <Restaurant3Butons
+                                        r_id={r.id}
+                                        user={user}
+                                    />
                                     <div className="flex gap-1 mt-1">
                                         {[1, 2, 3, 4, 5].map((i) => (
                                             <StarIcon

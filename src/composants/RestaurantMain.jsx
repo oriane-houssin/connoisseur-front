@@ -3,7 +3,7 @@ export default function RestaurantMain({name, website, tel}) {
         <div className="text-white py-4">
             <div className="mb-8">
                 <h1 className="text-2xl uppercase mb-8">{name}</h1>
-                <p className="text-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                <p className="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     Ipsum has been the
                     industry's
                     standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
