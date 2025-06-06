@@ -1,3 +1,4 @@
+import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import {useState, useEffect} from 'react';
 import API from '../services/api.js';
@@ -9,7 +10,7 @@ export default function RestaurantMeta({average, cuisine, vegan, vegetarian, whe
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
 
-//FETCH RATING AND FAV
+//FETCH RATING
     useEffect(() => {
         const fetchData = async () => {
             if (user && r_id) {
@@ -23,7 +24,6 @@ export default function RestaurantMeta({average, cuisine, vegan, vegetarian, whe
                     } console.log(rating.data.userRating);
                 } catch (err) {
                     console.log(err);
-                    setLiked(false);
                     setUserRating(0);
                 }
             }
@@ -109,9 +109,10 @@ export default function RestaurantMeta({average, cuisine, vegan, vegetarian, whe
                 <div className="flex gap-1 mt-1 text-center">
                     {[1, 2, 3, 4, 5].map((i) => (
                         <StarIcon
-                            key={i}
+                            key={`average-star-${i}`}
                             className={`w-4 h-4 ${i <= average ? 'text-green' : 'text-gray-600'}`}
                             fill={i <= average ? 'currentColor' : 'none'}
+                            data-testid={`average-star-${i}`}
                         />
                     ))}
                 </div>

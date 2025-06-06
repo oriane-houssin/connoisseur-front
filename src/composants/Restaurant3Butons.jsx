@@ -1,3 +1,4 @@
+import React from 'react';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
@@ -139,7 +140,8 @@ export default function Restaurant3Butons({r_id, user}) {
             <WatchLaterIcon onClick={toggleToVisit}
                             className={`cursor-pointer transition-colors ${isToVisit ? "text-green" : ""}`}/>
             <FavoriteIcon onClick={toggleLike}
-                          className={`cursor-pointer transition-colors ${liked ? "text-green" : ""}`}/>
+                          className={`cursor-pointer transition-colors ${liked ? "text-green" : ""}`}
+                          data-testid="FavoriteIcon"/>
             <LocalDiningIcon onClick={toggleVisited}
                              className={`cursor-pointer transition-colors ${isVisited ? "text-green" : ""}`}/>
         </div>
