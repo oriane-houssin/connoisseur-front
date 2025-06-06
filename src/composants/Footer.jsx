@@ -10,7 +10,8 @@ export default function Footer() {
             <div className="flex justify-between items-center">
                 <nav className="flex gap-6">
                     <Link to="/" className="hover:text-green transition-colors">FAQ</Link>
-                    <Link to="/" className="hover:text-green transition-colors">Terms</Link>
+                    <Link to="/terms" className="hover:text-green transition-colors">Conditions Générales d'Utilisation</Link>
+                    <Link to="/terms" className="hover:text-green transition-colors">Politique de Confidentialité</Link>
                     <a className="hover:text-green transition-colors" href="https://public.opendatasoft.com/explore/dataset/osm-france-food-service/information/?disjunctive.meta_code_com&disjunctive.meta_code_reg&disjunctive.meta_code_dep&sort=stars">Data Source</a>
                 </nav>
                 <p className="text-xs font-thin">Made with love by Oriane</p>
