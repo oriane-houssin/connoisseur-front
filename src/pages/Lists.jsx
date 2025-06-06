@@ -35,7 +35,7 @@ export default function Lists() {
             setLists([]);
             throw error;
         }
-    }, [user, setLists, setApiError]);
+    }, [user, setLists]);
 
     useEffect(() => {
         if (user && !apiLoading) {
