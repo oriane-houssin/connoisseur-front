@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import Header from '../composants/Header';
+import Footer from '../composants/Footer';
 
 export default function Register() {
     const [form, setForm] = useState({username: "", email: "", password: "",  password2: ""});
@@ -54,25 +56,89 @@ export default function Register() {
     };
 
     return (
-        <form className="place-self-center" onSubmit={handleSubmit}>
-            <Box sx={{ width: 400 }}>
-                <Stack spacing={2}>
-                    <h1>Merci de vous inscrire</h1>
-                    <TextField id="username" label="Username" variant="outlined" size="small" onChange={handleChange}/>
-                    {fieldError.username && <p className="text-red-500 text-sm">{fieldError.username}</p>}
-                    <TextField id="email" label="Email" variant="outlined" size="small" onChange={handleChange}/>
-                    {fieldError.email && <p className="text-red-500 text-sm">{fieldError.email}</p>}
-                    <TextField id="password" label="Password" variant="outlined" size="small" onChange={handleChange}/>
-                    {fieldError.password && <p className="text-red-500 text-sm">{fieldError.password}</p>}
-                    <TextField id="password2" label="Confirmez le mot de passe" variant="outlined" size="small" onChange={handleChange}/>
-                    {fieldError.password2 && <p className="text-red-500 text-sm">{fieldError.password2}</p>}
-                    <Button variant="contained" onClick={handleSubmit}>S'inscrire</Button>
-                    <Button variant="link" href="/login">Déjà inscrit ? Se connecter</Button>
-                </Stack>
-            </Box>
+        <div>
+            <Header />
+            <form className="place-self-center m-20" onSubmit={handleSubmit}>
+                <Box sx={{width: 400}}>
+                    <Stack spacing={2}>
+                        <h1 className="text-white text-xl text-center">Merci de vous inscrire</h1>
+                        <TextField id="username" label="Username" variant="outlined" size="small"
+                                   onChange={handleChange}
+                                   sx={{
+                                       '& .MuiOutlinedInput-root' : {
+                                           '& fieldset': {borderColor: 'oklch(0.9689 0.0146 132.47)'},
+                                           '&:hover fieldset': {borderColor: 'oklch(0.4692 0.0661 196.53)'},
+                                           '&.Mui-focused fieldset': {
+                                               borderColor: 'oklch(0.4692 0.0661 196.53)',
+                                               borderWidth: '3px',
+                                           },
+                                           '& input': {color: 'oklch(0.9689 0.0146 132.47)'},
+                                           '& label': {color: 'oklch(0.9689 0.0146 132.47)'},
+                                       },
+                                       '& .MuiInputLabel-root': {color: 'oklch(0.9689 0.0146 132.47)',},
+                                       '& .MuiInputLabel-root.Mui-focused': {color: 'oklch(0.4692 0.0661 196.53)'}
+                                   }}/>
+                        {fieldError.username && <p className="text-red-500 text-sm">{fieldError.username}</p>}
+                        <TextField id="email" label="Email" variant="outlined" size="small" onChange={handleChange}
+                                   sx={{
+                                       '& .MuiOutlinedInput-root' : {
+                                           '& fieldset': {borderColor: 'oklch(0.9689 0.0146 132.47)'},
+                                           '&:hover fieldset': {borderColor: 'oklch(0.4692 0.0661 196.53)'},
+                                           '&.Mui-focused fieldset': {
+                                               borderColor: 'oklch(0.4692 0.0661 196.53)',
+                                               borderWidth: '3px',
+                                           },
+                                           '& input': {color: 'oklch(0.9689 0.0146 132.47)'},
+                                           '& label': {color: 'oklch(0.9689 0.0146 132.47)'},
+                                       },
+                                       '& .MuiInputLabel-root': {color: 'oklch(0.9689 0.0146 132.47)',},
+                                       '& .MuiInputLabel-root.Mui-focused': {color: 'oklch(0.4692 0.0661 196.53)'}
+                                   }}/>
+                        {fieldError.email && <p className="text-red-500 text-sm">{fieldError.email}</p>}
+                        <TextField id="password" label="Password" variant="outlined" size="small"
+                                   onChange={handleChange}
+                                   sx={{
+                                       '& .MuiOutlinedInput-root' : {
+                                           '& fieldset': {borderColor: 'oklch(0.9689 0.0146 132.47)'},
+                                           '&:hover fieldset': {borderColor: 'oklch(0.4692 0.0661 196.53)'},
+                                           '&.Mui-focused fieldset': {
+                                               borderColor: 'oklch(0.4692 0.0661 196.53)',
+                                               borderWidth: '3px',
+                                           },
+                                           '& input': {color: 'oklch(0.9689 0.0146 132.47)'},
+                                           '& label': {color: 'oklch(0.9689 0.0146 132.47)'},
+                                       },
+                                       '& .MuiInputLabel-root': {color: 'oklch(0.9689 0.0146 132.47)',},
+                                       '& .MuiInputLabel-root.Mui-focused': {color: 'oklch(0.4692 0.0661 196.53)'}
+                                   }}/>
+                        {fieldError.password && <p className="text-red-500 text-sm">{fieldError.password}</p>}
+                        <TextField id="password2" label="Confirmez le mot de passe" variant="outlined" size="small"
+                                   onChange={handleChange}
+                                   sx={{
+                                       '& .MuiOutlinedInput-root' : {
+                                           '& fieldset': {borderColor: 'oklch(0.9689 0.0146 132.47)'},
+                                           '&:hover fieldset': {borderColor: 'oklch(0.4692 0.0661 196.53)'},
+                                           '&.Mui-focused fieldset': {
+                                               borderColor: 'oklch(0.4692 0.0661 196.53)',
+                                               borderWidth: '3px',
+                                           },
+                                           '& input': {color: 'oklch(0.9689 0.0146 132.47)'},
+                                           '& label': {color: 'oklch(0.9689 0.0146 132.47)'},
+                                       },
+                                       '& .MuiInputLabel-root': {color: 'oklch(0.9689 0.0146 132.47)',},
+                                       '& .MuiInputLabel-root.Mui-focused': {color: 'oklch(0.4692 0.0661 196.53)'}
+                                   }}/>
+                        {fieldError.password2 && <p className="text-red-500 text-sm">{fieldError.password2}</p>}
+                        <Button variant="contained" onClick={handleSubmit} sx={{backgroundColor: 'oklch(0.5977 0.137 127.7)', '&:hover': {backgroundColor: 'oklch(0.5265 0.137 127.7)'}}}>S'inscrire</Button>
+                        <Button variant="link" href="/login"><h3 className="text-blue-green">Déjà inscrit ? Se connecter</h3></Button>
+                    </Stack>
+                </Box>
 
 
-            {error && <p>{error}</p>}
-        </form>
+                {error && <p>{error}</p>}
+            </form>
+            <Footer />
+        </div>
+
     )
 }
